@@ -1,5 +1,6 @@
 import weasyprint
 from django.contrib.admin.views.decorators import staff_member_required
+from django.core.mail import EmailMessage
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.template.loader import render_to_string
@@ -158,4 +159,15 @@ def email_pdf(request):
     response['Content-Disposition'] = "filename='order_{}.pdf'".format('file_name')
     weasyprint.HTML(string=html).write_pdf(response,
                                            stylesheets=[weasyprint.CSS('static/css/pdf.css')])
+
+    # pdf = response['Content-Disposition']
+    # to_emails = ['ishaq@gmail.com']
+    # subject = "EMAIL FROM ATLAS"
+    # email = EmailMessage(subject, body=pdf, from_email='attaazd@gmail.com', to=to_emails)
+    # email.attach('Ishaq Muhammed' + '.pdf', pdf, "application/pdf")
+    # email.content_subtype = "pdf"
+    # email.encoding = 'us-ascii'
+    # email.send()
+
+
     return response
