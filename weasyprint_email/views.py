@@ -5,6 +5,8 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.template.loader import render_to_string
 
+from emails.models import Email
+
 product_model = [
     {'name': 'BLUE OX',
      'atlas_number': '1271-7',
@@ -33,8 +35,13 @@ def email_pdf(request):
     weasyprint.HTML(string=html).write_pdf(response,
                                            stylesheets=[weasyprint.CSS('static/css/pdf.css')])
 
-    print(html)
+    # obj = Email.objects.get(id=instance_id)
+    # context = {'instance': obj}
+    # pdf = render_to_pdf('your/pdf/template.html', context)
+    # filename = "YourPDF_Order{}.pdf" % (obj.slug)
+    # obj.pdf.save(filename, File(BytesIO(pdf.content)))
 
+    # print(html)
 
     # pdf = response['Content-Disposition']
     # to_emails = ['ishaq@gmail.com']
