@@ -3,7 +3,8 @@
     <h1>My Shop</h1>
     <ul>
         {% for product in products %}
-        <li>{{product}}</li>
+        <li>{{product.name}}</li>
+        <li>{{product.atlas_number}}</li>
         {% endfor %}
     </ul>
 </body>

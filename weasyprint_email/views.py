@@ -5,147 +5,20 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.template.loader import render_to_string
 
-product_model = {
-    '1': {
-        'name': 'BLUE OX',
-        'atlas_number': '1271-7',
-        'vendorNum': '1',
-        'vendorId': '1',
-        'productId': '1',
-        'product': '1',
-        'storeId': '1',
-        'status': '1',
-        'regularPrice': '749.00',
-        'specialPrice': '539.00',
-        'description': '1',
-        'assortment_benchmark': 12},
-
-    '2': {
-        'name': 'BLUE OX',
-        'atlas_number': '1271-8',
-        'vendorNum': '1',
-        'vendorId': '1',
-        'productId': '1',
-        'product': '1',
-        'storeId': '1',
-        'status': '1',
-        'regularPrice': '749.00',
-        'specialPrice': '539.00',
-        'description': '1',
-        'assortment_benchmark': 12},
-
-    '3': {
-        'name': 'CANADIAN RV MATS',
-        'atlas_number': '1626-2',
-        'vendorNum': '1',
-        'vendorId': '1',
-        'productId': '1',
-        'product': '1',
-        'storeId': '1',
-        'status': '1',
-        'regularPrice': '29.90',
-        'specialPrice': '19.95',
-        'description': '1',
-        'assortment_benchmark': 12},
-
-    '4': {
-        'name': 'CANADIAN RV MATS',
-        'atlas_number': '1626-5',
-        'vendorNum': '1',
-        'vendorId': '1',
-        'productId': '1',
-        'product': '1',
-        'storeId': '1',
-        'status': '1',
-        'regularPrice': '39.90',
-        'specialPrice': '28.95',
-        'description': '1',
-        'assortment_benchmark': 10},
-
-    '5': {
-        'name': 'CANADIAN RV MATS',
-        'atlas_number': '1626-6',
-        'vendorNum': '1',
-        'vendorId': '1',
-        'productId': '1',
-        'product': '1',
-        'storeId': '1',
-        'status': '1',
-        'regularPrice': '39.90',
-        'specialPrice': '28.95',
-        'description': '1',
-        'assortment_benchmark': 10},
-
-    '6': {
-        'name': 'CANADIAN RV MATS',
-        'atlas_number': '1629-1',
-        'vendorNum': '1',
-        'vendorId': '1',
-        'productId': '1',
-        'product': '1',
-        'storeId': '1',
-        'status': '1',
-        'regularPrice': '59.90',
-        'specialPrice': '46.95',
-        'description': '1',
-        'assortment_benchmark': 24},
-
-    '7': {
-        'name': 'CREATIVE PRODUCTS',
-        'atlas_number': '203-8',
-        'vendorNum': '1',
-        'vendorId': '1',
-        'productId': '1',
-        'product': '1',
-        'storeId': '1',
-        'status': '1',
-        'regularPrice': '37.50',
-        'specialPrice': '24.95',
-        'description': '1',
-        'assortment_benchmark': 24},
-
-    '8': {
-        'name': 'GCI OUTDOOR',
-        'atlas_number': '1625-6',
-        'vendorNum': '1',
-        'vendorId': '1',
-        'productId': '1',
-        'product': '1',
-        'storeId': '1',
-        'status': '1',
-        'regularPrice': '79.50',
-        'specialPrice': '59.95',
-        'description': '1',
-        'assortment_benchmark': 4},
-
-    '9': {
-        'name': 'GCI OUTDOOR',
-        'atlas_number': '1625-22',
-        'vendorNum': '1',
-        'vendorId': '1',
-        'productId': '1',
-        'product': '1',
-        'storeId': '1',
-        'status': '1',
-        'regularPrice': '54.50',
-        'specialPrice': '39.95',
-        'description': '1',
-        'assortment_benchmark': 4},
-
-    '10': {
-        'name': 'GCI OUTDOOR',
-        'atlas_number': '1625-23',
-        'vendorNum': '1',
-        'vendorId': '1',
-        'productId': '1',
-        'product': '1',
-        'storeId': '1',
-        'status': '1',
-        'regularPrice': '49.50',
-        'specialPrice': '34.95',
-        'description': '1',
-        'assortment_benchmark': 4},
-}
+product_model = [
+    {'name': 'BLUE OX',
+     'atlas_number': '1271-7',
+     'vendorNum': '1',
+     'vendorId': '1',
+     'productId': '1',
+     'product': '1',
+     'storeId': '1',
+     'status': '1',
+     'regularPrice': '749.00',
+     'specialPrice': '539.00',
+     'description': '1',
+     'assortment_benchmark': 12}
+]
 
 
 def index_view(request):
@@ -160,6 +33,9 @@ def email_pdf(request):
     weasyprint.HTML(string=html).write_pdf(response,
                                            stylesheets=[weasyprint.CSS('static/css/pdf.css')])
 
+    print(html)
+
+
     # pdf = response['Content-Disposition']
     # to_emails = ['ishaq@gmail.com']
     # subject = "EMAIL FROM ATLAS"
@@ -168,6 +44,19 @@ def email_pdf(request):
     # email.content_subtype = "pdf"
     # email.encoding = 'us-ascii'
     # email.send()
+
+    # Write PDF to file
+    # document_html = HTML(string=html, base_url=request.build_absolute_uri())
+    # document = document_html.render()
+    # if len(document.pages) > 1:
+    #     for page in document.pages[1:]:
+    #         str(page)
+    #     pdf = document.write_pdf()
+    # else:
+    #     pdf = document.write_pdf()
+    # # response = HttpResponse(html)
+    # response = HttpResponse(pdf, content_type='application/pdf')
+    # response['Content-Disposition'] = 'filename="Invoice {0} | Invoice {0}.pdf"'.format(self.id)
 
 
     return response
